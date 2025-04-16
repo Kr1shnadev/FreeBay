@@ -19,23 +19,24 @@
                 <div class="search-bar">
                     <div class="location-select">
                         <i class="fas fa-map-marker-alt"></i>
-                        <select>
+                        <select id="locationSelect">
                             <option value="all">All India</option>
+                            <option value="andheri east">Andheri East</option>
+                            <option value="powai">Powai</option>
                             <option value="mumbai">Mumbai</option>
                             <option value="delhi">Delhi</option>
-                            <option value="bangalore">Bangalore</option>
+                            <option value="andheri">Andheri</option>
                             <option value="hyderabad">Hyderabad</option>
                             <option value="chennai">Chennai</option>
                             <option value="panaji">Panaji</option>
                             <option value="kolkata">Kolkata</option>
-                            <option value="patna">Patna</option> 
-                            <option value="ranchi">Ranchi</option> 
-                            <option value="thiruvananthapuram">Thiruvananthapuram</option>           
+                            <option value="ranchi">Ranchi</option>
+                            <option value="thiruvananthapuram">Thiruvananthapuram</option>
                         </select>
                     </div>
                     <div class="search-input">
-                        <input type="text" placeholder="Search donations...">
-                        <button class="search-btn">
+                        <input type="text" id="searchInput" placeholder="Search donations...">
+                        <button class="search-btn" id="searchBtn">
                             <i class="fas fa-search"></i>
                         </button>
                     </div>
@@ -58,33 +59,37 @@
 
     <div class="categories-bar">
         <div class="categories-container">
-            <a href="#" class="category-item active">
+            <a href="#" class="category-btn active" data-category="all">
                 <i class="fas fa-border-all"></i>
                 All Categories
             </a>
-            <a href="#" class="category-item">
+            <a href="#" class="category-btn" data-category="books">
                 <i class="fas fa-book"></i>
                 Books
             </a>
-            <a href="#" class="category-item">
+            <a href="#" class="category-btn" data-category="clothing">
                 <i class="fas fa-tshirt"></i>
                 Clothing
             </a>
-            <a href="#" class="category-item">
+            <a href="#" class="category-btn" data-category="electronics">
                 <i class="fas fa-laptop"></i>
                 Electronics
             </a>
-            <a href="#" class="category-item">
+            <a href="#" class="category-btn" data-category="furniture">
                 <i class="fas fa-couch"></i>
                 Furniture
             </a>
-            <a href="#" class="category-item">
+            <a href="#" class="category-btn" data-category="sports">
                 <i class="fas fa-bicycle"></i>
                 Sports
             </a>
-            <a href="#" class="category-item">
+            <a href="#" class="category-btn" data-category="toys">
                 <i class="fas fa-puzzle-piece"></i>
                 Toys
+            </a>
+            <a href="#" class="category-btn" data-category="music">
+                <i class="fas fa-music"></i>
+                Music
             </a>
         </div>
     </div>
@@ -129,9 +134,9 @@
             <div class="featured-section">
                 <h2>Featured Donations</h2>
                 <div class="featured-items">
-                    <div class="donation-card featured">
+                    <div class="donation-card featured" data-category="furniture" data-location="andheri east" data-condition="good">
                         <div class="card-image">
-                            <img src="https://via.placeholder.com/300x200" alt="Study Table">
+                            <img src="images\studytable.png" alt="Study Table">
                             <span class="tag">Furniture</span>
                             <button class="favorite-btn">
                                 <i class="far fa-heart"></i>
@@ -147,9 +152,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="donation-card featured">
+                    <div class="donation-card featured" data-category="books" data-location="powai" data-condition="like new">
                         <div class="card-image">
-                            <img src="https://via.placeholder.com/300x200" alt="Books">
+                            <img src="images\book.png" alt="Books">
                             <span class="tag">Books</span>
                             <button class="favorite-btn">
                                 <i class="far fa-heart"></i>
@@ -165,6 +170,188 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Start of moved donation cards from Recent Donations -->
+                    <div class="donation-card" data-category="electronics" data-location="mumbai" data-condition="good">
+                        <div class="card-image">
+                            <img src="images/laptop.png" alt="Laptop">
+                            <span class="tag">Electronics</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>HP Laptop</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Mumbai</p>
+                            <p class="description">Core i5, 8GB RAM, 256GB SSD, good battery life</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Good</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="sports" data-location="delhi" data-condition="good">
+                        <div class="card-image">
+                            <img src="images/bike.png" alt="Bicycle">
+                            <span class="tag">Sports</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Mountain Bike</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Delhi</p>
+                            <p class="description">21-speed mountain bike, recently serviced</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Good</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="clothing" data-location="andheri" data-condition="like new">
+                        <div class="card-image">
+                            <img src="images/winter.png" alt="Clothes">
+                            <span class="tag">Clothing</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Winter Clothes Set</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Andheri</p>
+                            <p class="description">Set of winter jackets and sweaters, size M</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Like New</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="music" data-location="hyderabad" data-condition="fair">
+                        <div class="card-image">
+                            <img src="images/guitar.png" alt="Guitar">
+                            <span class="tag">Music</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Acoustic Guitar</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Hyderabad</p>
+                            <p class="description">Yamaha acoustic guitar with bag and picks</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Fair</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="furniture" data-location="chennai" data-condition="good">
+                        <div class="card-image">
+                            <img src="images/sofa.png" alt="Sofa">
+                            <span class="tag">Furniture</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>3-Seater Sofa</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Chennai</p>
+                            <p class="description">Comfortable fabric sofa, beige color</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Good</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="toys" data-location="panaji" data-condition="good">
+                        <div class="card-image">
+                            <img src="images/lego.png" alt="Toys">
+                            <span class="tag">Toys</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>LEGO Collection</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Panaji</p>
+                            <p class="description">Various LEGO sets with instruction manuals</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Good</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="electronics" data-location="kolkata" data-condition="good">
+                        <div class="card-image">
+                            <img src="images/lcd.png" alt="Monitor">
+                            <span class="tag">Electronics</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>24" LCD Monitor</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Kolkata</p>
+                            <p class="description">Full HD monitor with HDMI and VGA ports</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Good</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="sports" data-location="powai" data-condition="fair">
+                        <div class="card-image">
+                            <img src="images/cricket.png" alt="Cricket Kit">
+                            <span class="tag">Sports</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Cricket Kit</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Powai</p>
+                            <p class="description">Complete cricket set with bat, pads, and helmet</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Fair</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="furniture" data-location="ranchi" data-condition="like new">
+                        <div class="card-image">
+                            <img src="images/bookshelf.png" alt="Bookshelf">
+                            <span class="tag">Furniture</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Wooden Bookshelf</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Ranchi</p>
+                            <p class="description">5-tier wooden bookshelf, easy to assemble</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Like New</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card" data-category="electronics" data-location="thiruvananthapuram" data-condition="good">
+                        <div class="card-image">
+                            <img src="images/phone.png" alt="Smartphone">
+                            <span class="tag">Electronics</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Samsung Galaxy Phone</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Thiruvananthapuram</p>
+                            <p class="description">4GB RAM, 64GB storage, with charger and case</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Good</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End of moved donation cards from Recent Donations -->
                 </div>
             </div>
 
@@ -172,7 +359,7 @@
             <div class="recent-donations">
                 <h2>Recent Donations</h2>
                 <div class="donations-container">
-                    <!-- Donation Cards will be dynamically added here -->
+                    <!-- No recent donations at this time. -->
                 </div>
             </div>
         </div>
@@ -193,5 +380,6 @@
             </div>
         </div>
     </footer>
+    <script src="filter.js"></script>
 </body>
 </html>
