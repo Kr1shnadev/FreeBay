@@ -42,12 +42,12 @@ body, html {
 .login-box {
   padding: 38px 32px 30px 32px;
   border-radius: 18px;
-  background: #fff8f1;
+  background: #e3f2fd;
   box-shadow: none;
   width: 350px;
   text-align: center;
   position: relative;
-  border: 2px solid #ffe0b2;
+  border: 2px solid #90caf9;
   overflow: hidden;
 }
 
@@ -75,7 +75,7 @@ h2 {
   width: 54px;
   height: 54px;
   border-radius: 12px;
-  background: #fff3e0;
+  background: #bbdefb;
   box-shadow: none;
   padding: 6px;
   display: inline-block;
@@ -91,7 +91,7 @@ input[type="text"] {
   width: 100%;
   padding: 13px 44px 13px 14px;
   border-radius: 8px;
-  border: 1.5px solid #ffd180;
+  border: 1.5px solid #90caf9;
   outline: none;
   font-size: 16px;
   background: #fff;
@@ -104,8 +104,8 @@ input[type="text"] {
 
 input[type="email"]:focus,
 input[type="password"]:focus {
-  background: #fffde7;
-  border: 1.5px solid #ffb74d;
+  background: #e3f2fd;
+  border: 1.5px solid #64b5f6;
 }
 
 
@@ -114,7 +114,7 @@ button {
   padding: 13px 0;
   border-radius: 10px;
   border: none;
-  background: #ff9800;
+  background: #1976d2;
   color: #fff;
   font-size: 17px;
   font-weight: 700;
@@ -126,7 +126,7 @@ button {
 }
 
 button:hover {
-  background: #fb8c00;
+  background: #1565c0;
   color: #fff;
 }
 
@@ -142,7 +142,8 @@ button:hover {
   height: 100%;
   display: flex;
   align-items: center;
-  padding-right: 10px;
+  padding-right: 0;
+  z-index: 10;
 }
 
 .toggle-password {
@@ -151,13 +152,18 @@ button:hover {
   padding: 5px;
   margin: 0;
   cursor: pointer;
-  color: #ccc;
+  color: #1976d2;
   opacity: 0.85;
   transition: color 0.2s, opacity 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
   outline: none;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
 }
 
 .toggle-password:focus {
@@ -182,7 +188,7 @@ button:hover {
 }
 
 .signup-link a {
-  color: #ff9800;
+  color: #1976d2;
   font-weight: 600;
   text-decoration: none;
   transition: color 0.2s;
@@ -190,7 +196,7 @@ button:hover {
 
 .signup-link a:hover {
   text-decoration: underline;
-  color: #388e3c;
+  color: #1565c0;
 }
 
 /* 🌀 Hover Effect for the Login Box */
