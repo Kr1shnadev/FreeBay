@@ -158,20 +158,76 @@
             margin-bottom: 0;
         }
         .donations-section h3 {
-            margin-bottom: 14px;
+            margin-bottom: 20px;
             font-size: 1.22em;
         }
-        .donations-section ul {
-            list-style: none;
-            padding: 0;
+        .user-donations-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
         }
-        .donations-section li {
+        .donation-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        .donation-card:hover {
+            transform: translateY(-5px);
+        }
+        .card-image {
+            position: relative;
+            height: 160px;
+        }
+        .card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .tag {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #1976d2;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .card-content h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.1rem;
+            color: #1976d2;
+        }
+        .location, .description {
+            margin: 8px 0;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 10px;
+            border-top: 1px solid #f0f0f0;
+            margin-top: 10px;
+        }
+        .condition {
+            color: #888;
+            font-size: 0.9rem;
+        }
+        .loading-message, .no-donations-message {
+            grid-column: 1 / -1;
+            padding: 20px;
+            text-align: center;
             background: #e3f2fd;
-            margin-bottom: 10px;
-            border-radius: 7px;
-            padding: 14px 18px;
+            border-radius: 8px;
             color: #1565c0;
-            font-size: 1.08em;
         }
         .home-btn {
             display: inline-block;
@@ -259,9 +315,9 @@
         </div>
         <div class="donations-section">
             <h3>Your Recent Donations</h3>
-            <ul id="user-donations-list">
-                <li>Loading...</li>
-            </ul>
+            <div id="user-donations-list" class="user-donations-grid">
+                <div class="loading-message">Loading your donations...</div>
+            </div>
         </div>
     </div>
     <script>
@@ -316,23 +372,82 @@
         });
 
         function loadUserDonations() {
-            const list = document.getElementById('user-donations-list');
-            list.innerHTML = '<li>Loading...</li>';
+            const container = document.getElementById('user-donations-list');
+            container.innerHTML = '<div class="loading-message">Loading your donations...</div>';
+            
             db.collection('users').doc(currentUser.uid).collection('donations')
                 .orderBy('timestamp', 'desc')
-                .limit(5)
+                .limit(6)
                 .get()
                 .then(snapshot => {
-                    list.innerHTML = '';
                     if (snapshot.empty) {
-                        list.innerHTML = '<li>No donations yet.</li>';
+                        container.innerHTML = '<div class="no-donations-message">You haven\'t made any donations yet.</div>';
                         return;
                     }
+                    
+                    container.innerHTML = '';
                     snapshot.forEach(doc => {
-                        const d = doc.data();
-                        list.innerHTML += `<li><b>${d.item.name}</b> (${d.item.category}) - ${d.item.quantity} pcs</li>`;
+                        const donation = doc.data();
+                        const donationCard = createDonationCard(donation, doc.id);
+                        container.appendChild(donationCard);
                     });
+                })
+                .catch(error => {
+                    console.error("Error loading your donations:", error);
+                    container.innerHTML = '<div class="error-message">Error loading your donations. Please try again later.</div>';
                 });
+        }
+        
+        function createDonationCard(donation, donationId) {
+            const card = document.createElement('div');
+            card.className = 'donation-card';
+            card.dataset.id = donationId;
+            
+            // Default image based on category
+            let imageSrc = 'images/default.png';
+            if (donation.item.category === 'furniture') imageSrc = 'images/sofa.png';
+            if (donation.item.category === 'electronics') imageSrc = 'images/laptop.png';
+            if (donation.item.category === 'books') imageSrc = 'images/book.png';
+            if (donation.item.category === 'clothing') imageSrc = 'images/winter.png';
+            if (donation.item.category === 'sports') imageSrc = 'images/bike.png';
+            if (donation.item.category === 'toys') imageSrc = 'images/lego.png';
+            if (donation.item.category === 'music') imageSrc = 'images/guitar.png';
+            
+            card.innerHTML = `
+                <div class="card-image">
+                    <img src="${imageSrc}" alt="${donation.item.name}">
+                    <span class="tag">${donation.item.category || 'Other'}</span>
+                </div>
+                <div class="card-content">
+                    <h3>${donation.item.name}</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> ${donation.delivery ? (donation.delivery.address || 'Unknown') : 'Unknown'}</p>
+                    <p class="description">${donation.item.notes || 'No description'}</p>
+                    <div class="card-footer">
+                        <span class="condition"><i class="fas fa-star"></i> ${donation.item.condition || 'Good'}</span>
+                        <span class="quantity"><i class="fas fa-box"></i> ${donation.item.quantity || 1} pcs</span>
+                    </div>
+                </div>
+            `;
+            
+            // Make the card clickable to view details
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function() {
+                // Create URL with parameters for donation details page
+                const params = new URLSearchParams({
+                    title: donation.item.name,
+                    category: donation.item.category || 'Other',
+                    condition: donation.item.condition || 'Good',
+                    location: donation.delivery ? (donation.delivery.address || 'Unknown') : 'Unknown',
+                    description: donation.item.notes || 'No description',
+                    image: imageSrc,
+                    id: donationId
+                });
+                
+                // Navigate to details page
+                window.location.href = `donation-details.html?${params.toString()}`;
+            });
+            
+            return card;
         }
         function logout() {
             auth.signOut().then(() => {
