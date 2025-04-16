@@ -413,7 +413,7 @@
           <p>Your unused items can make a difference in someone's life</p>
         </div>
 
-        <form id="item-donation-form">
+        <form id="item-donation-form" autocomplete="on">
           <!-- Item Categories -->
           <h3 style="margin-top: 30px; margin-bottom: 20px; color: #1565c0;">What would you like to donate?</h3>
           <div class="item-categories">
@@ -456,22 +456,22 @@
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="donor-name">Full Name</label>
-              <input type="text" class="form-control" id="donor-name" required placeholder="Your full name" />
+              <input type="text" class="form-control" id="donor-name" name="donor-name" autocomplete="name" required placeholder="Your full name" />
             </div>
             <div class="form-group">
               <label class="form-label" for="donor-email">Email</label>
-              <input type="email" class="form-control" id="donor-email" required placeholder="Your email address" />
+              <input type="email" class="form-control" id="donor-email" name="donor-email" autocomplete="email" required placeholder="Your email address" />
             </div>
           </div>
 
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="donor-phone">Phone Number</label>
-              <input type="tel" class="form-control" id="donor-phone" required placeholder="Your phone number" />
+              <input type="tel" class="form-control" id="donor-phone" name="donor-phone" autocomplete="tel" required placeholder="Your phone number" />
             </div>
             <div class="form-group">
               <label class="form-label" for="donor-location">Location</label>
-              <input type="text" class="form-control" id="donor-location" required placeholder="Your city/area" />
+              <input type="text" class="form-control" id="donor-location" name="donor-location" autocomplete="street-address" required placeholder="Your city/area" />
             </div>
           </div>
 
@@ -671,7 +671,15 @@
           alert('Please select a category for your donation');
           return;
         }
-        
+
+        // Ensure user is logged in
+        const currentUser = firebase.auth().currentUser;
+        if (!currentUser) {
+          alert('Please log in to submit a donation');
+          window.location.href = 'login.html';
+          return;
+        }
+
         // Get form values
         const name = document.getElementById('donor-name').value;
         const email = document.getElementById('donor-email').value;
@@ -683,74 +691,66 @@
         const notes = document.getElementById('item-notes').value;
         const deliveryMethod = document.querySelector('input[name="delivery-method"]:checked').value;
         const pickupAddress = document.getElementById('pickup-address').value;
-        
-        // In a real application, you would process the donation here
-        console.log('Processing item donation:', {
-          donor: { name, email, phone, location },
-          item: { name: itemName, category: selectedCategory, quantity, condition, notes },
-          delivery: { method: deliveryMethod, address: pickupAddress }
-        });
-        
-        // Show success message
-        donationForm.style.display = 'none';
-        donationSuccess.style.display = 'block';
-        
-        // In a real application, you would save this to Firebase
-        // For example:
-        /*
-        if (firebase.apps.length) {
-          const db = firebase.firestore();
-          
-          // Upload photo if provided
-          let photoUrl = null;
-          const photoFile = document.getElementById('item-photo').files[0];
-          
-          const saveDonation = () => {
-            db.collection('item-donations').add({
-              donor: { name, email, phone, location },
-              item: { 
-                name: itemName, 
-                category: selectedCategory, 
-                quantity: parseInt(quantity), 
-                condition, 
-                notes,
-                photoUrl
-              },
-              delivery: { 
-                method: deliveryMethod, 
-                address: pickupAddress 
-              },
-              status: 'pending',
-              timestamp: firebase.firestore.FieldValue.serverTimestamp()
-            })
-            .then(() => {
-              console.log('Donation recorded in database');
-            })
-            .catch(error => {
-              console.error('Error recording donation:', error);
-            });
+
+        // Save donation to Firebase (text/metadata only, no images)
+        const db = firebase.firestore();
+        function saveDonation() {
+          const donationData = {
+            userId: currentUser.uid,
+            userEmail: currentUser.email,
+            donor: { name, email, phone, location },
+            item: {
+              name: itemName,
+              category: selectedCategory,
+              quantity: parseInt(quantity),
+              condition,
+              notes
+              // photoUrl removed
+            },
+            delivery: {
+              method: deliveryMethod,
+              address: pickupAddress
+            },
+            status: 'pending',
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
           };
-          
-          if (photoFile) {
-            const storageRef = firebase.storage().ref();
-            const photoRef = storageRef.child(`donation-photos/${Date.now()}_${photoFile.name}`);
-            
-            photoRef.put(photoFile).then(snapshot => {
-              return snapshot.ref.getDownloadURL();
-            })
-            .then(downloadURL => {
-              photoUrl = downloadURL;
-              saveDonation();
+
+          db.collection('donations').add(donationData)
+            .then((docRef) => {
+              db.collection('users').doc(currentUser.uid).collection('donations').doc(docRef.id).set(donationData)
+                .then(() => {
+                  // Redirect to browse.html after successful donation
+                  window.location.href = 'browse.html';
+                })
+                .catch(error => {
+                  alert('Error saving to user profile: ' + error.message);
+                });
             })
             .catch(error => {
-              console.error('Error uploading photo:', error);
-              saveDonation(); // Still save the donation even if photo upload fails
+              alert('Error saving donation: ' + error.message);
             });
-          } else {
-            saveDonation();
-          }
         }
-        */
+        saveDonation();
+      });
+    });
+    // Autofill donor info from Firebase Auth and Firestore
+    document.addEventListener('DOMContentLoaded', function() {
+      // Wait for Firebase Auth to be ready
+      firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          // Fill name and email from Auth
+          document.getElementById('donor-name').value = user.displayName || '';
+          document.getElementById('donor-email').value = user.email || '';
+
+          // Fetch phone and location from Firestore (users collection)
+          firebase.firestore().collection('users').doc(user.uid).get().then(function(doc) {
+            if (doc.exists) {
+              const data = doc.data();
+              if (data.phone) document.getElementById('donor-phone').value = data.phone;
+              if (data.address) document.getElementById('donor-location').value = data.address;
+            }
+          });
+        }
       });
     });
   </script>

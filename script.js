@@ -45,9 +45,7 @@ firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
 
 // ==== Login Function using Firebase Authentication ====
-function validateLogin(event) {
-  event.preventDefault(); // Prevent form from submitting normally
-  
+function validateLogin() {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
 
@@ -58,16 +56,14 @@ function validateLogin(event) {
 
   auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
-      // Successful login - redirect to browse page
-      console.log('Login successful, redirecting...');
-      setTimeout(() => {
-        window.location.replace('browse.html');
-      }, 500);
+      // Signed in
+      alert('Login successful! Welcome to FreeBay.');
+      // Redirect to browse.html
+      window.location.href = 'browse.html';
     })
     .catch((error) => {
-      console.error('Login error:', error);
       alert('Login failed: ' + error.message);
     });
 
-  return false;
+  return false; // Prevent default form submission
 }

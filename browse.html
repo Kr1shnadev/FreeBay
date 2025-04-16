@@ -46,7 +46,7 @@
                 <a href="#notifications" class="nav-icon">
                     <i class="far fa-heart"></i>
                 </a>
-                <a href="profile.html" class="nav-icon">
+                <a href="dashboard.html" class="nav-icon" title="Your Dashboard">
                     <i class="far fa-user"></i>
                 </a>
                 <a href="donate.html" class="donate-btn">
@@ -344,8 +344,8 @@
             <!-- Recent Donations -->
             <div class="recent-donations">
                 <h2>Recent Donations</h2>
-                <div class="donations-container">
-                    <!-- No recent donations at this time. -->
+                <div class="donations-container" id="recent-donations-container">
+                    <div class="loading-message">Loading recent donations...</div>
                 </div>
             </div>
         </div>
@@ -368,5 +368,142 @@
     </footer>
     <script src="filter.js"></script>
     <script src="donation-card.js"></script>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script>
+        // Auth check: redirect to login.html if not logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for Firebase to be initialized
+            var checkAuthInterval = setInterval(function() {
+                if (window.firebase && firebase.auth) {
+                    clearInterval(checkAuthInterval);
+                    firebase.auth().onAuthStateChanged(function(user) {
+                        if (!user) {
+                            window.location.href = 'login.html';
+                        }
+                    });
+                }
+            }, 100);
+        });
+    </script>
+    
+    <script>
+        // Firebase configuration
+        var firebaseConfig = {
+            apiKey: "AIzaSyCu10UwrAtEucO340SJ8Pm4G3rBL88w6Io",
+            authDomain: "freebay-35764.firebaseapp.com",
+            projectId: "freebay-35764",
+        };
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+        
+        // Load recent donations
+        document.addEventListener('DOMContentLoaded', function() {
+            loadRecentDonations();
+        });
+        
+        function loadRecentDonations() {
+            const container = document.getElementById('recent-donations-container');
+            container.innerHTML = '<div class="loading-message">Loading recent donations...</div>';
+            
+            db.collection('donations')
+                .orderBy('timestamp', 'desc')
+                .limit(6)
+                .get()
+                .then(snapshot => {
+                    if (snapshot.empty) {
+                        container.innerHTML = '<div class="no-donations-message">No recent donations at this time.</div>';
+                        return;
+                    }
+                    
+                    container.innerHTML = '';
+                    snapshot.forEach(doc => {
+                        const donation = doc.data();
+                        const donationCard = createDonationCard(donation, doc.id);
+                        container.appendChild(donationCard);
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading recent donations:", error);
+                    container.innerHTML = '<div class="error-message">Error loading donations. Please try again later.</div>';
+                });
+        }
+        
+        function createDonationCard(donation, donationId) {
+            const card = document.createElement('div');
+            card.className = 'donation-card';
+            card.dataset.category = donation.item.category || 'other';
+            card.dataset.location = donation.delivery ? (donation.delivery.address || 'Unknown') : 'Unknown';
+            card.dataset.condition = donation.item.condition || 'good';
+            card.dataset.id = donationId;
+            
+            // Default image based on category
+            let imageSrc = 'images/default.png';
+            if (donation.item.category === 'furniture') imageSrc = 'images/sofa.png';
+            if (donation.item.category === 'electronics') imageSrc = 'images/laptop.png';
+            if (donation.item.category === 'books') imageSrc = 'images/book.png';
+            if (donation.item.category === 'clothing') imageSrc = 'images/winter.png';
+            if (donation.item.category === 'sports') imageSrc = 'images/bike.png';
+            if (donation.item.category === 'toys') imageSrc = 'images/lego.png';
+            if (donation.item.category === 'music') imageSrc = 'images/guitar.png';
+            
+            card.innerHTML = `
+                <div class="card-image">
+                    <img src="${imageSrc}" alt="${donation.item.name}">
+                    <span class="tag">${donation.item.category || 'Other'}</span>
+                    <button class="favorite-btn">
+                        <i class="far fa-heart"></i>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <h3>${donation.item.name}</h3>
+                    <p class="location"><i class="fas fa-map-marker-alt"></i> ${donation.delivery ? (donation.delivery.address || 'Unknown') : 'Unknown'}</p>
+                    <p class="description">${donation.item.notes || 'No description available'}</p>
+                    <div class="card-footer">
+                        <span class="condition"><i class="fas fa-star"></i> ${donation.item.condition || 'Good'}</span>
+                        <a href="#" class="contact-btn" data-donor-email="${donation.userEmail}"><i class="fab fa-whatsapp"></i> Contact</a>
+                    </div>
+                </div>
+            `;
+            
+            // Make the card clickable
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', function(e) {
+                // Don't trigger if clicking the favorite button or contact button
+                if (e.target.closest('.favorite-btn') || e.target.closest('.contact-btn')) {
+                    return;
+                }
+                
+                // Get card details for URL parameters
+                const title = donation.item.name;
+                const category = donation.item.category || 'Other';
+                const condition = donation.item.condition || 'Good';
+                const location = donation.delivery ? (donation.delivery.address || 'Unknown') : 'Unknown';
+                const description = donation.item.notes || 'No description available';
+                
+                // Create URL with parameters
+                const params = new URLSearchParams({
+                    title: title,
+                    category: category,
+                    condition: condition,
+                    location: location,
+                    description: description,
+                    image: imageSrc,
+                    id: donationId
+                });
+                
+                // Navigate to details page
+                window.location.href = `donation-details.html?${params.toString()}`;
+            });
+            
+            return card;
+        }
+    </script>
 </body>
 </html>
