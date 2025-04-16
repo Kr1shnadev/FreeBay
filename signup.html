@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DaanSetu Signup - Create Account</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- 🔵 Animated Particles Background -->
+  <div id="particles-js"></div>
+
+  <!-- 📝 Signup Form -->
+  <div class="login-container">
+    <form class="login-box" onsubmit="return registerUser()">
+      <div class="login-logo">
+        <img src="logo.png.png" alt="DaanSetu Logo" style="width:80px;height:auto;" />
+      </div>
+      <h2>DaanSetu Signup</h2>
+      <div class="marketplace-tagline">Create your DaanSetu account</div>
+      <div class="input-group">
+        <input type="text" id="signup-name" required placeholder="Full Name" />
+      </div>
+      <div class="input-group">
+        <input type="email" id="signup-email" required placeholder="Email" />
+      </div>
+      <div class="input-group password-group">
+        <input type="password" id="signup-password" required placeholder="New Password" autocomplete="new-password" />
+        <div class="password-toggle-wrapper">
+          <button type="button" class="toggle-password" id="toggleSignupPasswordBtn" aria-label="Show password" onclick="toggleSignupPassword()">
+            <svg id="signupEyeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </button>
+        </div>
+      </div>
+      <div class="input-group password-group">
+        <input type="password" id="signup-confirm-password" required placeholder="Confirm Password" autocomplete="new-password" />
+      </div>
+      <button type="submit">Sign Up</button>
+      <p class="signup-link">Already have an account? <a href="index.html">Sign in</a></p>
+      <p id="signup-status" style="text-align:center; margin-top:10px;"></p>
+    </form>
+  </div>
+
+  <!-- ✅ Firebase JS SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+  <script src="signup.js"></script>
+
+  <!-- 🌌 VanillaTilt for 3D Tilt Effect -->
+  <script src="https://cdn.jsdelivr.net/npm/vanilla-tilt@1.7.0/dist/vanilla-tilt.min.js"></script>
+  <script>
+    VanillaTilt.init(document.querySelector(".login-box"), {
+      max: 15,
+      speed: 400,
+      glare: true,
+      "max-glare": 0.4,
+      scale: 1.05,
+    });
+  </script>
+
+  <!-- 🌟 Particles.js for Animated Background -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    particlesJS.load("particles-js", "particles.json", function () {
+      console.log("particles.js loaded successfully.");
+    });
+  </script>
+</body>
+</html>
