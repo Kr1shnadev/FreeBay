@@ -425,13 +425,20 @@
                     <div class="card-footer">
                         <span class="condition"><i class="fas fa-star"></i> ${donation.item.condition || 'Good'}</span>
                         <span class="quantity"><i class="fas fa-box"></i> ${donation.item.quantity || 1} pcs</span>
+                        <button class="reserve-btn" title="Reserve Donation" style="background:#ffb300;color:#fff;border:none;border-radius:5px;padding:6px 14px;cursor:pointer;font-size:0.95em;margin-left:10px;">
+                            <i class="fas fa-bookmark"></i> Reserve
+                        </button>
+                        <button class="delete-btn" title="Delete Donation" style="background:#e53935;color:#fff;border:none;border-radius:5px;padding:6px 14px;cursor:pointer;font-size:0.95em;margin-left:10px;">
+                            <i class="fas fa-trash"></i> Delete
+                        </button>
                     </div>
                 </div>
             `;
             
-            // Make the card clickable to view details
+            // Make the card clickable to view details (except delete button)
             card.style.cursor = 'pointer';
-            card.addEventListener('click', function() {
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('.delete-btn')) return;
                 // Create URL with parameters for donation details page
                 const params = new URLSearchParams({
                     title: donation.item.name,
@@ -446,6 +453,65 @@
                 // Navigate to details page
                 window.location.href = `donation-details.html?${params.toString()}`;
             });
+
+            // Delete button functionality
+            card.querySelector('.delete-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (!confirm('Are you sure you want to delete this donation? This cannot be undone.')) return;
+                // Remove from user's donations subcollection
+                db.collection('users').doc(currentUser.uid).collection('donations').doc(donationId).delete()
+                    .then(() => {
+                        // Remove from global donations collection (if exists)
+                        db.collection('donations').doc(donationId).delete()
+                            .then(() => {
+                                card.remove();
+                            })
+                            .catch(err => {
+                                alert('Deleted from your list, but failed to remove from global donations: ' + err.message);
+                                card.remove();
+                            });
+                    })
+                    .catch(err => {
+                        alert('Failed to delete donation: ' + err.message);
+                    });
+            });
+
+            // Reserve button functionality
+            card.querySelector('.reserve-btn').addEventListener('click', function(e) {
+                e.stopPropagation();
+                if (donation.reserved) {
+                    alert('This donation is already reserved.');
+                    return;
+                }
+                if (!confirm('Are you sure you want to reserve this donation?')) return;
+                // Update donation status in both user and global Firestore collections
+                db.collection('users').doc(currentUser.uid).collection('donations').doc(donationId).update({
+                    reserved: true
+                })
+                .then(() => {
+                    db.collection('donations').doc(donationId).update({
+                        reserved: true
+                    })
+                    .then(() => {
+                        card.querySelector('.reserve-btn').disabled = true;
+                        card.querySelector('.reserve-btn').textContent = 'Reserved';
+                        card.querySelector('.reserve-btn').style.background = '#4CAF50';
+                    })
+                    .catch(err => {
+                        alert('Failed to update global donation status: ' + err.message);
+                    });
+                })
+                .catch(err => {
+                    alert('Failed to update donation status: ' + err.message);
+                });
+            });
+
+            // Show badge and disable Reserve button if already reserved
+            if (donation.reserved) {
+                card.querySelector('.reserve-btn').disabled = true;
+                card.querySelector('.reserve-btn').textContent = 'Reserved';
+                card.querySelector('.reserve-btn').style.background = '#4CAF50';
+            }
             
             return card;
         }

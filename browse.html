@@ -471,7 +471,30 @@
                     </div>
                 </div>
             `;
-            
+
+            // Show reserved badge and disable contact if reserved
+            if (donation.status === 'reserved' || donation.reserved) {
+                const badge = document.createElement('div');
+                badge.textContent = 'Reserved';
+                badge.style.position = 'absolute';
+                badge.style.top = '12px';
+                badge.style.right = '12px';
+                badge.style.background = '#ffb300';
+                badge.style.color = '#fff';
+                badge.style.padding = '5px 12px';
+                badge.style.borderRadius = '18px';
+                badge.style.fontWeight = 'bold';
+                badge.style.fontSize = '0.95em';
+                badge.style.boxShadow = '0 2px 8px #ffe082';
+                card.querySelector('.card-image').appendChild(badge);
+                // Disable contact button
+                const contactBtn = card.querySelector('.contact-btn');
+                contactBtn.textContent = 'Reserved';
+                contactBtn.style.background = '#bdbdbd';
+                contactBtn.style.cursor = 'not-allowed';
+                contactBtn.style.pointerEvents = 'none';
+            }
+
             // Make the card clickable
             card.style.cursor = 'pointer';
             card.addEventListener('click', function(e) {
