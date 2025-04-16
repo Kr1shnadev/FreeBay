@@ -41,15 +41,13 @@ body, html {
 /* 💻 Login Box */
 .login-box {
   padding: 38px 32px 30px 32px;
-  border-radius: 22px;
-  background: rgba(255,255,255,0.95);
-  box-shadow: 0 12px 32px 0 rgba(0, 0, 0, 0.16), 0 1.5px 6px 0 rgba(255,180,0,0.08);
+  border-radius: 18px;
+  background: #fff8f1;
+  box-shadow: none;
   width: 350px;
   text-align: center;
   position: relative;
-  transition: transform 0.3s cubic-bezier(.4,2.2,.2,1), box-shadow 0.3s;
-  backdrop-filter: blur(10px) saturate(140%);
-  border: 2px solid #ffd70044;
+  border: 2px solid #ffe0b2;
   overflow: hidden;
 }
 
@@ -57,7 +55,6 @@ h2 {
   margin-bottom: 8px;
   color: #000;
   font-size: 26px;
-  text-transform: uppercase;
   letter-spacing: 2px;
   font-weight: 700;
   text-shadow: 0 2px 8px rgba(255,215,0,0.08);
@@ -77,9 +74,9 @@ h2 {
 .login-logo img {
   width: 54px;
   height: 54px;
-  border-radius: 16px;
-  background: rgba(255,255,255,0.14);
-  box-shadow: 0 2px 12px 0 rgba(0,183,255,0.11);
+  border-radius: 12px;
+  background: #fff3e0;
+  box-shadow: none;
   padding: 6px;
   display: inline-block;
 }
@@ -92,62 +89,45 @@ input[type="email"],
 input[type="password"],
 input[type="text"] {
   width: 100%;
-  padding: 13px 44px 13px 14px; /* More right padding for eye icon */
-  border-radius: 12px;
-  border: 1.5px solid rgba(0,183,255,0.13);
+  padding: 13px 44px 13px 14px;
+  border-radius: 8px;
+  border: 1.5px solid #ffd180;
   outline: none;
   font-size: 16px;
-  background: rgba(255,255,255,0.13);
+  background: #fff;
   color: #000;
   margin-top: 10px;
-  box-shadow: 0 1.5px 6px 0 rgba(0,183,255,0.09);
-  transition: border 0.2s, background 0.2s, box-shadow 0.25s;
+  box-shadow: none;
+  transition: border 0.2s, background 0.2s;
 }
 
 
 input[type="email"]:focus,
 input[type="password"]:focus {
-  background: rgba(255,255,255,0.22);
-  border: 1.5px solid #00b7ff;
-}
-
-input[type="email"]:focus,
-input[type="password"]:focus {
-  background: rgba(255, 255, 255, 0.3);
-  border: 1.5px solid #00b7ff;
-  box-shadow: 0 0 0 3px rgba(0,183,255,0.18);
+  background: #fffde7;
+  border: 1.5px solid #ffb74d;
 }
 
 
 button {
   width: 100%;
   padding: 13px 0;
-  border-radius: 12px;
+  border-radius: 10px;
   border: none;
-  background: linear-gradient(90deg, #ffd700 0%, #43cea2 100%);
-  color: #1c3a6b;
+  background: #ff9800;
+  color: #fff;
   font-size: 17px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 4px 24px 0 rgba(67,206,162,0.16);
-  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: none;
+  transition: background 0.3s;
   letter-spacing: 1px;
   outline: none;
 }
 
 button:hover {
-  background: linear-gradient(90deg, #ffb347 0%, #43cea2 100%);
+  background: #fb8c00;
   color: #fff;
-  box-shadow: 0 8px 32px 0 rgba(255,215,0,0.18);
-}
-
-button:hover {
-  background: linear-gradient(90deg, #009fdb 0%, #4a5fc1 100%);
-  box-shadow: 0 6px 32px 0 rgba(0,183,255,0.28);
-}
-
-button:hover {
-  background: #009fdb;
 }
 
 .password-group {
@@ -214,6 +194,4 @@ button:hover {
 }
 
 /* 🌀 Hover Effect for the Login Box */
-.login-box:hover {
-  transform: translateY(-5px);
-}
+
