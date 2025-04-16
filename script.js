@@ -58,7 +58,8 @@ function validateLogin() {
     .then((userCredential) => {
       // Signed in
       alert('Login successful! Welcome to FreeBay.');
-      // Redirect or update UI as needed
+      // Redirect to browse.html
+      window.location.href = 'browse.html';
     })
     .catch((error) => {
       alert('Login failed: ' + error.message);

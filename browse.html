@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .nav-user-link {
+    color: #1565c0;
+    font-size: 1.8em;
+    margin: 0 12px;
+    transition: color 0.2s;
+    text-decoration: none;
+}
+.nav-user-link:hover {
+    color: #1976d2;
+}
+.dashboard-link {
+            position: absolute;
+            top: 24px;
+            right: 32px;
+            color: #1565c0;
+            background: #e3f2fd;
+            border: 2px solid #90caf9;
+            border-radius: 50%;
+            padding: 10px 12px 8px 12px;
+            font-size: 2em;
+            text-decoration: none;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+            z-index: 100;
+        }
+        .dashboard-link:hover {
+            background: #90caf9;
+            color: #1976d2;
+            border-color: #1976d2;
+        }
+    </style>
+    <title>DaanSetu - Browse Donations</title>
+    <link rel="stylesheet" href="browse.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Firebase JS SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage-compat.js"></script>
+    
+    <!-- JS Scripts -->
+    <script src="script.js"></script>
+</head>
+<body>
+    
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <img src="logo.png" alt="DaanSetu">
+                    <span>DaanSetu</span>
+                </div>
+                <div class="search-bar">
+                    <div class="location-select">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <select>
+                            <option value="all">All India</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="delhi">Delhi</option>
+                            <option value="bangalore">Bangalore</option>
+                        </select>
+                    </div>
+                    <div class="search-input">
+                        <input type="text" placeholder="Search donations...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="#notifications" class="nav-icon">
+                    <i class="far fa-heart"></i>
+                </a>
+                <a href="dashboard.html" class="nav-user-link" title="Dashboard"><i class="fa-regular fa-user"></i></a>
+                <a href="donate.html" class="donate-btn">
+                    <i class="fas fa-plus"></i>
+                    Donate Item
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="categories-bar">
+        <div class="categories-container">
+            <a href="#" class="category-item active">
+                <i class="fas fa-border-all"></i>
+                All Categories
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-book"></i>
+                Books
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-tshirt"></i>
+                Clothing
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-laptop"></i>
+                Electronics
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-couch"></i>
+                Furniture
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-bicycle"></i>
+                Sports
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-puzzle-piece"></i>
+                Toys
+            </a>
+        </div>
+    </div>
+
+    <main class="browse-content">
+        <div class="filters-sidebar">
+            <h3>Filters</h3>
+            <div class="filter-group">
+                <h4>Condition</h4>
+                <label class="filter-option">
+                    <input type="checkbox" name="condition" value="new">
+                    Like New
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" name="condition" value="good">
+                    Good
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" name="condition" value="fair">
+                    Fair
+                </label>
+            </div>
+            <div class="filter-group">
+                <h4>Distance</h4>
+                <label class="filter-option">
+                    <input type="radio" name="distance" value="5">
+                    Within 5 km
+                </label>
+                <label class="filter-option">
+                    <input type="radio" name="distance" value="10">
+                    Within 10 km
+                </label>
+                <label class="filter-option">
+                    <input type="radio" name="distance" value="20">
+                    Within 20 km
+                </label>
+            </div>
+        </div>
+
+        <div class="donations-grid">
+            <!-- Featured Section -->
+            <div class="featured-section">
+                <h2>Featured Donations</h2>
+                <div class="featured-items">
+                    <div class="donation-card featured">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/300x200" alt="Study Table">
+                            <span class="tag">Furniture</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Study Table with Chair</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Andheri East</p>
+                            <p class="description">Wooden study table with comfortable chair, great condition</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Good</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card featured">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/300x200" alt="Books">
+                            <span class="tag">Books</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Engineering Textbooks Set</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Powai</p>
+                            <p class="description">Complete set of engineering books, like new condition</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Like New</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Donations -->
+            <div class="recent-donations">
+                <h2>Recent Donations</h2>
+                <div class="donations-container" id="all-donations">
+                    <!-- Donation Cards will be dynamically added here -->
+                </div>
+            </div>
+            
+            <!-- User's Donations Section -->
+            <div class="user-donations" id="user-donations-section" style="display: none;">
+                <h2>Your Donations</h2>
+                <div class="donations-container" id="user-donations">
+                    <!-- User's donation cards will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Safety</a>
+                <a href="#">Support</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Check if user is logged in
+            firebase.auth().onAuthStateChanged(function(user) {
+                if (user) {
+                    // User is signed in
+                    console.log('User is signed in:', user.email);
+                    document.getElementById('user-donations-section').style.display = 'block';
+                    
+                    // Load user's donations
+                    loadUserDonations(user.uid);
+                } else {
+                    // No user is signed in, redirect to login
+                    console.log('No user is signed in');
+                    document.getElementById('user-donations-section').style.display = 'none';
+                }
+                
+                // Load all donations regardless of login status
+                loadAllDonations();
+            });
+            
+            // Function to load all donations
+            function loadAllDonations() {
+                const db = firebase.firestore();
+                const donationsContainer = document.getElementById('all-donations');
+                
+                // Show loading state
+                donationsContainer.innerHTML = '<div class="loading">Loading donations...</div>';
+                
+                // Use Firestore real-time listener
+                db.collection('donations')
+                    .orderBy('timestamp', 'desc')
+                    .limit(10)
+                    .onSnapshot((querySnapshot) => {
+                        // Clear previous donations
+                        donationsContainer.innerHTML = '';
+                        if (querySnapshot.empty) {
+                            donationsContainer.innerHTML = '<p class="no-donations">No donations available yet.</p>';
+                            return;
+                        }
+                        querySnapshot.forEach((doc) => {
+                            const donation = doc.data();
+                            const donationCard = createDonationCard(donation, doc.id);
+                            donationsContainer.appendChild(donationCard);
+                        });
+                    }, (error) => {
+                        console.error('Error getting donations: ', error);
+                        donationsContainer.innerHTML = '<p class="error">Error loading donations. Please try again later.</p>';
+                    });
+            }
+            
+            // Function to load user's donations
+            function loadUserDonations(userId) {
+                const db = firebase.firestore();
+                const userDonationsContainer = document.getElementById('user-donations');
+                
+                // Clear existing content
+                userDonationsContainer.innerHTML = '<div class="loading">Loading your donations...</div>';
+                
+                db.collection('users').doc(userId).collection('donations')
+                    .orderBy('timestamp', 'desc')
+                    .get()
+                    .then((querySnapshot) => {
+                        // Clear loading message
+                        userDonationsContainer.innerHTML = '';
+                        
+                        if (querySnapshot.empty) {
+                            userDonationsContainer.innerHTML = '<p class="no-donations">You haven\'t made any donations yet.</p>';
+                            return;
+                        }
+                        
+                        querySnapshot.forEach((doc) => {
+                            const donation = doc.data();
+                            const donationCard = createDonationCard(donation, doc.id, true);
+                            userDonationsContainer.appendChild(donationCard);
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('Error getting user donations: ', error);
+                        userDonationsContainer.innerHTML = '<p class="error">Error loading your donations. Please try again later.</p>';
+                    });
+            }
+            
+            // Function to create a donation card
+            function createDonationCard(donation, id, isUserDonation = false) {
+                const card = document.createElement('div');
+                card.className = 'donation-card';
+                card.dataset.id = id;
+                
+                // Default image if none provided
+                const imageUrl = donation.item.photoUrl || 'https://via.placeholder.com/300x200?text=No+Image';
+                
+                // Create card HTML structure
+                card.innerHTML = `
+                    <div class="card-image">
+                        <img src="${imageUrl}" alt="${donation.item.name}">
+                        <span class="tag">${donation.item.category}</span>
+                        <button class="favorite-btn">
+                            <i class="far fa-heart"></i>
+                        </button>
+                        ${isUserDonation ? '<span class="user-badge">Your Donation</span>' : ''}
+                    </div>
+                    <div class="card-content">
+                        <h3>${donation.item.name}</h3>
+                        <p class="location"><i class="fas fa-map-marker-alt"></i> ${donation.donor.location}</p>
+                        <p class="description">${donation.item.notes || 'No description provided'}</p>
+                        <div class="card-footer">
+                            <span class="condition"><i class="fas fa-star"></i> ${donation.item.condition}</span>
+                            <a href="#" class="contact-btn" data-email="${donation.donor.email}"><i class="fab fa-whatsapp"></i> Contact</a>
+                        </div>
+                    </div>
+                `;
+                
+                // Add event listeners for the card
+                const contactBtn = card.querySelector('.contact-btn');
+                contactBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const email = this.dataset.email;
+                    alert(`Contact the donor at: ${email}`);
+                    // In a real app, you might open a chat or show contact details
+                });
+                
+                return card;
+            }
+            
+            // Handle category filtering
+            const categoryLinks = document.querySelectorAll('.category-item');
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Remove active class from all links
+                    categoryLinks.forEach(item => item.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Get category name (excluding the icon)
+                    const categoryText = this.textContent.trim();
+                    
+                    // Filter donations based on category
+                    if (categoryText === 'All Categories') {
+                        loadAllDonations();
+                        // Also reload user donations if logged in
+                        const user = firebase.auth().currentUser;
+                        if (user) {
+                            loadUserDonations(user.uid);
+                        }
+                    } else {
+                        filterDonationsByCategory(categoryText);
+                    }
+                });
+            });
+            
+            // Function to filter donations by category
+            function filterDonationsByCategory(category) {
+                const db = firebase.firestore();
+                const donationsContainer = document.getElementById('all-donations');
+                
+                // Clear existing content
+                donationsContainer.innerHTML = '<div class="loading">Filtering donations...</div>';
+                
+                db.collection('donations')
+                    .where('item.category', '==', category)
+                    .orderBy('timestamp', 'desc')
+                    .get()
+                    .then((querySnapshot) => {
+                        // Clear loading message
+                        donationsContainer.innerHTML = '';
+                        
+                        if (querySnapshot.empty) {
+                            donationsContainer.innerHTML = `<p class="no-donations">No donations found in ${category} category.</p>`;
+                            return;
+                        }
+                        
+                        querySnapshot.forEach((doc) => {
+                            const donation = doc.data();
+                            const donationCard = createDonationCard(donation, doc.id);
+                            donationsContainer.appendChild(donationCard);
+                        });
+                    })
+                    .catch((error) => {
+                        console.error('Error filtering donations: ', error);
+                        donationsContainer.innerHTML = '<p class="error">Error filtering donations. Please try again later.</p>';
+                    });
+                    
+                // Also filter user donations if logged in
+                const user = firebase.auth().currentUser;
+                if (user) {
+                    const userDonationsContainer = document.getElementById('user-donations');
+                    userDonationsContainer.innerHTML = '<div class="loading">Filtering your donations...</div>';
+                    
+                    db.collection('users').doc(user.uid).collection('donations')
+                        .where('item.category', '==', category)
+                        .orderBy('timestamp', 'desc')
+                        .get()
+                        .then((querySnapshot) => {
+                            userDonationsContainer.innerHTML = '';
+                            
+                            if (querySnapshot.empty) {
+                                userDonationsContainer.innerHTML = `<p class="no-donations">You don't have any donations in the ${category} category.</p>`;
+                                return;
+                            }
+                            
+                            querySnapshot.forEach((doc) => {
+                                const donation = doc.data();
+                                const donationCard = createDonationCard(donation, doc.id, true);
+                                userDonationsContainer.appendChild(donationCard);
+                            });
+                        })
+                        .catch((error) => {
+                            console.error('Error filtering user donations: ', error);
+                            userDonationsContainer.innerHTML = '<p class="error">Error filtering your donations. Please try again later.</p>';
+                        });
+                }
+            }
+        });
+    </script>
+</body>
+</html>
