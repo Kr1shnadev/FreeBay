@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DaanSetu - Browse Donations</title>
+    <link rel="stylesheet" href="browse.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo">
+                    <img src="logo.png.png" alt="DaanSetu">
+                    <span>DaanSetu</span>
+                </div>
+                <div class="search-bar">
+                    <div class="location-select">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <select>
+                            <option value="all">All India</option>
+                            <option value="mumbai">Mumbai</option>
+                            <option value="delhi">Delhi</option>
+                            <option value="bangalore">Bangalore</option>
+                        </select>
+                    </div>
+                    <div class="search-input">
+                        <input type="text" placeholder="Search donations...">
+                        <button class="search-btn">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="nav-right">
+                <a href="#notifications" class="nav-icon">
+                    <i class="far fa-heart"></i>
+                </a>
+                <a href="profile.html" class="nav-icon">
+                    <i class="far fa-user"></i>
+                </a>
+                <a href="donate.html" class="donate-btn">
+                    <i class="fas fa-plus"></i>
+                    Donate Item
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="categories-bar">
+        <div class="categories-container">
+            <a href="#" class="category-item active">
+                <i class="fas fa-border-all"></i>
+                All Categories
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-book"></i>
+                Books
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-tshirt"></i>
+                Clothing
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-laptop"></i>
+                Electronics
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-couch"></i>
+                Furniture
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-bicycle"></i>
+                Sports
+            </a>
+            <a href="#" class="category-item">
+                <i class="fas fa-puzzle-piece"></i>
+                Toys
+            </a>
+        </div>
+    </div>
+
+    <main class="browse-content">
+        <div class="filters-sidebar">
+            <h3>Filters</h3>
+            <div class="filter-group">
+                <h4>Condition</h4>
+                <label class="filter-option">
+                    <input type="checkbox" name="condition" value="new">
+                    Like New
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" name="condition" value="good">
+                    Good
+                </label>
+                <label class="filter-option">
+                    <input type="checkbox" name="condition" value="fair">
+                    Fair
+                </label>
+            </div>
+            <div class="filter-group">
+                <h4>Distance</h4>
+                <label class="filter-option">
+                    <input type="radio" name="distance" value="5">
+                    Within 5 km
+                </label>
+                <label class="filter-option">
+                    <input type="radio" name="distance" value="10">
+                    Within 10 km
+                </label>
+                <label class="filter-option">
+                    <input type="radio" name="distance" value="20">
+                    Within 20 km
+                </label>
+            </div>
+        </div>
+
+        <div class="donations-grid">
+            <!-- Featured Section -->
+            <div class="featured-section">
+                <h2>Featured Donations</h2>
+                <div class="featured-items">
+                    <div class="donation-card featured">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/300x200" alt="Study Table">
+                            <span class="tag">Furniture</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Study Table with Chair</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Andheri East</p>
+                            <p class="description">Wooden study table with comfortable chair, great condition</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Good</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="donation-card featured">
+                        <div class="card-image">
+                            <img src="https://via.placeholder.com/300x200" alt="Books">
+                            <span class="tag">Books</span>
+                            <button class="favorite-btn">
+                                <i class="far fa-heart"></i>
+                            </button>
+                        </div>
+                        <div class="card-content">
+                            <h3>Engineering Textbooks Set</h3>
+                            <p class="location"><i class="fas fa-map-marker-alt"></i> Powai</p>
+                            <p class="description">Complete set of engineering books, like new condition</p>
+                            <div class="card-footer">
+                                <span class="condition"><i class="fas fa-star"></i> Like New</span>
+                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Donations -->
+            <div class="recent-donations">
+                <h2>Recent Donations</h2>
+                <div class="donations-container">
+                    <!-- Donation Cards will be dynamically added here -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="#">About</a>
+                <a href="#">Safety</a>
+                <a href="#">Support</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-link">Instagram</a>
+                <a href="#" class="social-link">Facebook</a>
+                <a href="#" class="social-link">Twitter</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
