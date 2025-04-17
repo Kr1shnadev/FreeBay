@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DaanSetu Login - Share with Purpose</title>
+  <title>DaanSetu Login </title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     * {
@@ -44,6 +44,14 @@
     .login-logo img {
       width: 80px;
       height: auto;
+    }
+
+    .login-logo h1 {
+      color: #c24244;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-top: 10px;
+      letter-spacing: 3px;
     }
 
     h2 {
@@ -148,10 +156,11 @@
   <div class="login-container">
     <form class="login-box" id="loginForm" onsubmit="return validateLogin(event)">
       <div class="login-logo">
-        <img src="DaanSetu__2_-removebg-preview.png" alt="DaanSetu Logo" style="width: 120px; height: auto;">
+        <img src="DaanSetu__2_-removebg-preview.png" alt="DaanSetu Logo">
+        <h1>DaanSetu</h1>
       </div>
       <h2>Welcome Back</h2>
-      <div class="marketplace-tagline">Share with Purpose</div>
+      <div class="marketplace-tagline">"Give it away.Don't throw it away."</div>
       <div class="input-group">
         <input type="email" id="email" required placeholder="Email">
       </div>
