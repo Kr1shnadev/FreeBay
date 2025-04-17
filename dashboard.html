@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Dashboard | FreeBay</title>
+    <title>User Dashboard | DaanSetu</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         html, body {
             height: 100%;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background: #e3f2fd;
-            color: #1565c0;
+            font-family: 'Poppins', sans-serif;
+            background: #ffede7;
+            color: #7f4722;
         }
         body {
             min-height: 100vh;
@@ -27,13 +27,13 @@
             margin: 32px auto 32px auto;
             background: #fff;
             border-radius: 18px;
-            box-shadow: 0 4px 24px 0 #90caf9;
+            box-shadow: 0 4px 12px rgba(127, 71, 34, 0.1);
             padding: 40px 40px 32px 40px;
             display: flex;
             flex-direction: column;
         }
         h2 {
-            color: #1976d2;
+            color: #c24244;
             margin-bottom: 28px;
             font-size: 2.2em;
             text-align: left;
@@ -43,6 +43,9 @@
             gap: 32px;
             align-items: flex-start;
             margin-bottom: 32px;
+            background: #ffede7;
+            padding: 24px;
+            border-radius: 12px;
         }
         .avatar-section {
             display: flex;
@@ -50,135 +53,72 @@
             align-items: center;
             min-width: 180px;
         }
-        .avatar-wrapper {
-            position: relative;
-            width: 140px;
-            height: 140px;
-            margin-bottom: 10px;
-        }
-        .avatar-img {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid #90caf9;
-            background: #e3f2fd;
-        }
-        .photo-upload-label {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
-            background: #1976d2;
-            color: #fff;
-            border-radius: 50%;
-            width: 38px;
-            height: 38px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: not-allowed;
-            box-shadow: 0 2px 8px #90caf9;
-            font-size: 1.2em;
-        }
-        .photo-note {
-            font-size: 0.95em;
-            color: #888;
-            margin-top: 4px;
-            text-align: center;
-        }
-        .profile-fields {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 18px;
-        }
-        .profile-row {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-        .profile-row label {
+        .avatar {
             width: 120px;
-            font-weight: 700;
-            color: #1565c0;
-            font-size: 1.1em;
+            height: 120px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-bottom: 20px;
+            border: 3px solid #c24244;
         }
-        .profile-row span, .profile-row input, .profile-row textarea {
-            flex: 1;
-            font-size: 1.08em;
-        }
-        .profile-row input, .profile-row textarea {
-            padding: 10px 12px;
-            border: 1.5px solid #90caf9;
-            border-radius: 7px;
-            background: #e3f2fd;
-            color: #1565c0;
-            margin-bottom: 0;
-            resize: none;
-        }
-        .profile-row textarea {
-            min-height: 48px;
-        }
-        .extra-section {
-            margin-bottom: 32px;
-        }
-        .extra-section h3 {
-            margin-bottom: 18px;
-            font-size: 1.25em;
-        }
-        .extra-section input {
+        .avatar img {
             width: 100%;
-            padding: 10px 12px;
-            border: 1.5px solid #90caf9;
-            border-radius: 7px;
-            background: #e3f2fd;
-            color: #1565c0;
-            margin-bottom: 18px;
-            font-size: 1.08em;
+            height: 100%;
+            object-fit: cover;
         }
-        .extra-section button {
-            background: #1976d2;
-            color: #fff;
+        .profile-info {
+            flex-grow: 1;
+        }
+        .info-group {
+            margin-bottom: 24px;
+        }
+        .info-label {
+            font-weight: 600;
+            color: #c24244;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+        }
+        .info-value {
+            font-size: 1.1em;
+            color: #7f4722;
+        }
+        .edit-btn {
+            background: #c24244;
+            color: white;
             border: none;
-            border-radius: 7px;
-            padding: 12px 28px;
-            font-size: 1.08em;
+            padding: 8px 16px;
+            border-radius: 6px;
             cursor: pointer;
-            margin-top: 8px;
+            font-size: 0.9em;
+            transition: background 0.3s ease;
         }
-        .extra-section button:disabled {
-            background: #90caf9;
-            cursor: not-allowed;
-        }
-        #extra-status {
-            margin-top: 8px;
-            font-size: 1.05em;
+        .edit-btn:hover {
+            background: #a93638;
         }
         .donations-section {
-            margin-bottom: 0;
+            margin-top: 32px;
         }
-        .donations-section h3 {
-            margin-bottom: 20px;
-            font-size: 1.22em;
-        }
-        .user-donations-grid {
+        .donations-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+            margin-top: 24px;
         }
         .donation-card {
-            background: white;
+            background: #ffede7;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .donation-card:hover {
             transform: translateY(-5px);
+            box-shadow: 0 6px 16px rgba(127, 71, 34, 0.15);
         }
         .card-image {
+            height: 200px;
+            background: #ffdcc8;
             position: relative;
-            height: 160px;
         }
         .card-image img {
             width: 100%;
@@ -190,87 +130,128 @@
             top: 10px;
             left: 10px;
             background: rgba(255,255,255,0.9);
-            padding: 4px 10px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.8em;
+            color: #c24244;
             font-weight: 500;
-            color: #1976d2;
         }
         .card-content {
-            padding: 15px;
+            padding: 16px;
         }
-        .card-content h3 {
-            margin: 0 0 10px 0;
-            font-size: 1.1rem;
-            color: #1976d2;
+        .card-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #7f4722;
         }
-        .location, .description {
-            margin: 8px 0;
-            font-size: 0.9rem;
-            color: #666;
-        }
-        .card-footer {
+        .card-meta {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding-top: 10px;
-            border-top: 1px solid #f0f0f0;
-            margin-top: 10px;
+            color: #7f4722;
+            font-size: 0.9em;
+            margin-top: 12px;
         }
-        .condition {
-            color: #888;
-            font-size: 0.9rem;
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 500;
         }
-        .loading-message, .no-donations-message {
-            grid-column: 1 / -1;
-            padding: 20px;
-            text-align: center;
-            background: #e3f2fd;
-            border-radius: 8px;
-            color: #1565c0;
+        .status-pending {
+            background: #ffdcc8;
+            color: #c24244;
+        }
+        .status-completed {
+            background: #d4edda;
+            color: #155724;
+        }
+        .home-btn, .logout-btn {
+            position: absolute;
+            top: 24px;
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s ease;
         }
         .home-btn {
-            display: inline-block;
-            background: #1976d2;
-            color: #fff;
-            border: none;
-            border-radius: 7px;
-            padding: 10px 22px;
-            font-size: 1.08em;
-            cursor: pointer;
-            text-decoration: none;
-            margin-right: 12px;
-            margin-top: 2px;
-            transition: background 0.2s;
+            left: 24px;
+            background: #c24244;
+            color: white;
         }
         .home-btn:hover {
-            background: #1565c0;
+            background: #a93638;
         }
         .logout-btn {
-            float: right;
-            background: #1565c0;
-            color: #fff;
+            right: 24px;
+            background: #ffdcc8;
+            color: #c24244;
             border: none;
-            border-radius: 7px;
-            padding: 10px 22px;
-            font-size: 1.08em;
             cursor: pointer;
         }
-        @media (max-width: 800px) {
+        .logout-btn:hover {
+            background: #ffcdb0;
+        }
+        .edit-form {
+            background: #ffede7;
+            padding: 24px;
+            border-radius: 12px;
+            margin-top: 16px;
+        }
+        .form-group {
+            margin-bottom: 16px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #7f4722;
+            font-weight: 500;
+        }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 8px 12px;
+            border: 2px solid #ffdcc8;
+            border-radius: 6px;
+            font-family: inherit;
+            color: #7f4722;
+            background: white;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #c24244;
+        }
+        .save-btn {
+            background: #c24244;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+        .save-btn:hover {
+            background: #a93638;
+        }
+        @media (max-width: 768px) {
             .dashboard-container {
-                padding: 16px 4vw 16px 4vw;
+                padding: 20px;
+                margin: 16px auto;
             }
             .profile-card {
                 flex-direction: column;
-                align-items: stretch;
-                gap: 18px;
+                align-items: center;
+                text-align: center;
             }
-            .avatar-section {
-                align-items: flex-start;
-                min-width: 0;
+            .donations-grid {
+                grid-template-columns: 1fr;
             }
-            .avatar-wrapper {
-                margin: 0 auto 10px auto;
+            .home-btn, .logout-btn {
+                position: static;
+                display: inline-block;
+                margin-bottom: 16px;
             }
         }
     </style>
@@ -286,36 +267,31 @@
         <h2 style="margin-bottom:12px;">User Dashboard</h2>
         <div class="profile-card">
             <div class="avatar-section">
-                <div class="avatar-wrapper">
-                    <img id="profile-photo" src="https://ui-avatars.com/api/?name=User&background=90caf9&color=1565c0&size=128" alt="Profile Photo" class="avatar-img">
-                    <label for="photo-upload" class="photo-upload-label" title="Photo upload not available on free plan">
-                        <i class="fas fa-camera"></i>
-                        <input type="file" id="photo-upload" accept="image/*" disabled style="display:none;">
-                    </label>
+                <div class="avatar">
+                    <img id="profile-photo" src="https://ui-avatars.com/api/?name=User&background=ffdcc8&color=c24244&size=128" alt="Profile Photo">
                 </div>
-                <div class="photo-note">Profile photo upload is <b>not available</b> on the free plan.</div>
             </div>
-            <div class="profile-fields">
-                <div class="profile-row"><label>Name:</label> <span id="profile-name">Loading...</span></div>
-                <div class="profile-row"><label>Email:</label> <span id="profile-email">Loading...</span></div>
-                <div class="profile-row"><label>Profession:</label> <input type="text" id="profession" placeholder="Enter profession"></div>
-                <div class="profile-row"><label>Bio/About:</label> <textarea id="bio" rows="2" placeholder="Tell us about yourself"></textarea></div>
+            <div class="profile-info">
+                <div class="info-group"><label class="info-label">Name:</label> <span id="profile-name" class="info-value">Loading...</span></div>
+                <div class="info-group"><label class="info-label">Email:</label> <span id="profile-email" class="info-value">Loading...</span></div>
+                <div class="info-group"><label class="info-label">Profession:</label> <input type="text" id="profession" placeholder="Enter profession" style="width: 100%; padding: 8px 12px; border: 2px solid #ffdcc8; border-radius: 6px; font-family: inherit; color: #7f4722; background: white;"></div>
+                <div class="info-group"><label class="info-label">Bio/About:</label> <textarea id="bio" rows="2" placeholder="Tell us about yourself" style="width: 100%; padding: 8px 12px; border: 2px solid #ffdcc8; border-radius: 6px; font-family: inherit; color: #7f4722; background: white;"></textarea></div>
             </div>
         </div>
         <div class="extra-section">
             <h3>Contact Info</h3>
             <form id="extra-form">
                 <label for="phone">Phone:</label>
-                <input type="text" id="phone" name="phone" placeholder="Enter phone number" required>
+                <input type="text" id="phone" name="phone" placeholder="Enter phone number" required style="width: 100%; padding: 8px 12px; border: 2px solid #ffdcc8; border-radius: 6px; font-family: inherit; color: #7f4722; background: white;">
                 <label for="address">Address:</label>
-                <input type="text" id="address" name="address" placeholder="Enter address" required>
-                <button type="submit" id="save-extra">Save Info</button>
+                <input type="text" id="address" name="address" placeholder="Enter address" required style="width: 100%; padding: 8px 12px; border: 2px solid #ffdcc8; border-radius: 6px; font-family: inherit; color: #7f4722; background: white;">
+                <button type="submit" id="save-extra" class="save-btn">Save Info</button>
             </form>
             <div id="extra-status"></div>
         </div>
         <div class="donations-section">
             <h3>Your Recent Donations</h3>
-            <div id="user-donations-list" class="user-donations-grid">
+            <div id="user-donations-list" class="donations-grid">
                 <div class="loading-message">Loading your donations...</div>
             </div>
         </div>
@@ -419,10 +395,10 @@
                     <span class="tag">${donation.item.category || 'Other'}</span>
                 </div>
                 <div class="card-content">
-                    <h3>${donation.item.name}</h3>
+                    <h3 class="card-title">${donation.item.name}</h3>
                     <p class="location"><i class="fas fa-map-marker-alt"></i> ${donation.delivery ? (donation.delivery.address || 'Unknown') : 'Unknown'}</p>
                     <p class="description">${donation.item.notes || 'No description'}</p>
-                    <div class="card-footer">
+                    <div class="card-meta">
                         <span class="condition"><i class="fas fa-star"></i> ${donation.item.condition || 'Good'}</span>
                         <span class="quantity"><i class="fas fa-box"></i> ${donation.item.quantity || 1} pcs</span>
                         <button class="reserve-btn" title="Reserve Donation" style="background:#ffb300;color:#fff;border:none;border-radius:5px;padding:6px 14px;cursor:pointer;font-size:0.95em;margin-left:10px;">

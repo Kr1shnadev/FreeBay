@@ -4,16 +4,16 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>DaanSetu - Donate Items</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* Reset for full page layout */
     body, html {
       height: 100%;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', 'Arial', sans-serif;
-      background: #121212;
-      color: #111;
-      overflow-x: hidden;
+      font-family: 'Poppins', sans-serif;
+      background-color: #ffede7;
+      color: #7f4722;
     }
     
     .wrapper {
@@ -22,22 +22,21 @@
       min-height: 100vh;
       width: 100%;
       position: relative;
-      margin-left: -20px; /* Shift page slightly to the left */
     }
     
     /* Header styles */
     .header {
-      background-color: #fff;
+      background-color: #ffede7;
       padding: 20px 30px;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 3px solid #1976d2;
+      border-bottom: 3px solid #c24244;
       width: 100%;
       z-index: 100;
       position: relative;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+      box-shadow: 0 2px 8px rgba(127, 71, 34, 0.1);
     }
     
     .logo-container {
@@ -50,64 +49,160 @@
       height: 35px;
       object-fit: contain;
       margin-right: 10px;
-      display: block;
     }
     
-    .site-title {
-      font-size: 24px;
-      font-weight: 700;
-      color: #1976d2;
-      margin: 0;
+    .site-name {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #c24244;
+      letter-spacing: 3px;
     }
     
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      margin: 0;
-    }
-    
-    .nav-link {
-      color: #fff;
-      background: #1976d2;
-      text-decoration: none;
-      font-weight: 700;
-      padding: 10px 25px;
-      border-radius: 8px;
-      border: 2px solid #1976d2;
-      font-size: 18px;
-      box-shadow: 0 2px 10px rgba(25,118,210,0.15), 0 1px 4px rgba(0,0,0,0.05);
-      margin: 0 10px;
-      display: inline-block;
-      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-      z-index: 20;
-      position: relative;
-    }
-    
-    .nav-link:hover {
-      background: #fff;
-      color: #1976d2;
-      border-color: #1976d2;
-      box-shadow: 0 6px 24px rgba(25,118,210,0.2), 0 2px 8px rgba(0,0,0,0.07);
-    }
-    
-    .nav-link.active {
-      background: #1976d2;
-      color: #fff;
-      border: 4px solid #1976d2;
-      box-shadow: 0 8px 32px rgba(25,118,210,0.22), 0 2px 8px rgba(0,0,0,0.09);
-    }
-    
-    /* Main content */
+    /* Main content styles */
     .main-content {
       flex: 1;
+      padding: 40px;
+      max-width: 1200px;
+      margin: 0 auto;
       width: 100%;
-      z-index: 5;
-      padding: 0;
-      background-color: #e3f2fd;
+      background-color: #ffede7;
     }
     
-
+    .section-title {
+      font-size: 2rem;
+      color: #7f4722;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+    
+    /* Form styles */
+    .donation-form {
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(127, 71, 34, 0.1);
+    }
+    
+    .form-section {
+      margin-bottom: 30px;
+    }
+    
+    .section-header {
+      color: #c24244;
+      font-size: 1.2rem;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+    }
+    
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      color: #7f4722;
+      font-weight: 500;
+    }
+    
+    .form-control {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid #ffede7;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #7f4722;
+      transition: border-color 0.3s ease;
+    }
+    
+    .form-control:focus {
+      outline: none;
+      border-color: #c24244;
+    }
+    
+    /* Category selection */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+    
+    .category-item {
+      background: #ffede7;
+      border: 2px solid transparent;
+      border-radius: 8px;
+      padding: 15px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .category-item:hover {
+      background: #ffdcc8;
+    }
+    
+    .category-item.selected {
+      background: #ffdcc8;
+      border-color: #c24244;
+    }
+    
+    .category-icon {
+      font-size: 24px;
+      margin-bottom: 8px;
+      color: #c24244;
+    }
+    
+    /* Image upload */
+    .item-photo-upload {
+      border: 2px dashed #c24244;
+      border-radius: 8px;
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #ffede7;
+    }
+    
+    .item-photo-upload:hover {
+      background: #ffdcc8;
+    }
+    
+    .upload-icon {
+      font-size: 40px;
+      margin-bottom: 10px;
+      color: #c24244;
+    }
+    
+    /* Submit button */
+    .submit-btn {
+      background: #c24244;
+      color: #fff;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      width: 100%;
+      margin-top: 20px;
+    }
+    
+    .submit-btn:hover {
+      background: #a93638;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .main-content {
+        padding: 20px;
+      }
+      
+      .category-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      }
+    }
     
     /* Donation form container */
     .donation-form-container {
@@ -126,146 +221,13 @@
     
     .form-title h1 {
       font-size: 32px;
-      color: #1976d2;
+      color: #c24244;
       margin-bottom: 10px;
     }
     
     .form-title p {
       font-size: 16px;
       color: #666;
-    }
-    
-    /* Item categories */
-    .item-categories {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
-      margin-bottom: 25px;
-    }
-    
-    .category-item {
-      flex: 1 0 calc(25% - 15px);
-      min-width: 120px;
-      padding: 15px;
-      background: #fff;
-      border: 1.5px solid #90caf9;
-      border-radius: 12px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    .category-item:hover {
-      background: #e3f2fd;
-      border-color: #64b5f6;
-    }
-    
-    .category-item.selected {
-      background: #bbdefb;
-      border-color: #1976d2;
-      box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.2);
-    }
-    
-    .category-icon {
-      font-size: 24px;
-      margin-bottom: 8px;
-    }
-    
-    .category-name {
-      font-weight: 600;
-      font-size: 14px;
-    }
-    
-    /* Form styles */
-    .form-row {
-      display: flex;
-      gap: 25px;
-      margin-bottom: 35px;
-    }
-    
-    .form-group {
-      flex: 1;
-      margin-bottom: 30px;
-    }
-    
-    .form-label {
-      display: block;
-      margin-bottom: 15px;
-      font-weight: 600;
-      color: #333;
-      font-size: 16px;
-    }
-    
-    .form-control {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 8px;
-      border: 1.5px solid #90caf9;
-      font-size: 16px;
-      transition: all 0.2s;
-      margin-bottom: 5px;
-    }
-    
-    .form-control:focus {
-      outline: none;
-      background: #e3f2fd;
-      border-color: #64b5f6;
-    }
-    
-    textarea.form-control {
-      resize: vertical;
-      min-height: 100px;
-    }
-    
-    .item-details {
-      margin-top: 20px;
-      border-top: 1px solid #ffe0b2;
-      padding-top: 20px;
-    }
-    
-    .item-photo-upload {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 20px;
-      border: 2px dashed #ffd180;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    
-    .item-photo-upload:hover {
-      background: #fff3e0;
-    }
-    
-    .upload-icon {
-      font-size: 40px;
-      color: #ff9800;
-      margin-bottom: 10px;
-    }
-    
-    .upload-text {
-      text-align: center;
-      color: #666;
-    }
-    
-    .submit-btn {
-      background: #ff9800;
-      color: white;
-      border: none;
-      padding: 15px 30px;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-      width: 100%;
-      margin-top: 20px;
-    }
-    
-    .submit-btn:hover {
-      background: #fb8c00;
     }
     
     /* Success message */
@@ -295,7 +257,7 @@
     .back-btn {
       display: inline-block;
       padding: 12px 25px;
-      background: #1976d2;
+      background: #c24244;
       color: white;
       text-decoration: none;
       border-radius: 8px;
@@ -304,17 +266,22 @@
     }
     
     .back-btn:hover {
-      background: #1565c0;
+      background: #a93638;
     }
     
     /* Footer */
     .footer {
-      background: #e3f2fd;
+      background: #ffede7;
       padding: 20px;
       text-align: center;
-      border-top: 2px solid #90caf9;
+      border-top: 2px solid #c24244;
       width: 100%;
       z-index: 10;
+    }
+    
+    .footer p {
+      color: #666;
+      font-size: 14px;
     }
     
     /* Scroll to top button */
@@ -324,7 +291,7 @@
       right: 30px;
       width: 50px;
       height: 50px;
-      background-color: #1976d2;
+      background-color: #c24244;
       color: white;
       border: none;
       border-radius: 50%;
@@ -341,53 +308,7 @@
     }
     
     #scroll-to-top:hover {
-      background-color: #1565c0;
-    }
-    
-    .footer p {
-      color: #666;
-      font-size: 14px;
-    }
-    
-    @media (max-width: 768px) {
-      .form-row {
-        flex-direction: column;
-        gap: 10px;
-      }
-      
-      .category-item {
-        flex: 1 0 calc(33% - 15px);
-      }
-      
-      .main-content {
-        padding: 20px 15px;
-      }
-      
-      .donation-form-container {
-        padding: 20px;
-      }
-      
-      .header {
-        padding: 10px 15px;
-      }
-      
-      .logo-container img {
-        width: 40px;
-        height: 40px;
-      }
-      
-      .site-title {
-        font-size: 20px;
-      }
-      
-      .nav-links {
-        gap: 10px;
-      }
-      
-      .nav-link {
-        padding: 6px 10px;
-        font-size: 14px;
-      }
+      background-color: #a93638;
     }
   </style>
 </head>
@@ -398,7 +319,7 @@
     <header class="header">
       <div class="logo-container">
         <img src="logo.png" alt="DaanSetu Logo" class="site-logo" />
-        <h1 class="site-title">DaanSetu</h1>
+        <h1 class="site-name">DaanSetu</h1>
       </div>
       <nav class="nav-links">
         <a href="browse.html" class="nav-link active">Home</a>
@@ -415,8 +336,8 @@
 
         <form id="item-donation-form" autocomplete="on">
           <!-- Item Categories -->
-          <h3 style="margin-top: 30px; margin-bottom: 20px; color: #1565c0;">What would you like to donate?</h3>
-          <div class="item-categories">
+          <h3 style="margin-top: 30px; margin-bottom: 20px; color: #c24244;">What would you like to donate?</h3>
+          <div class="category-grid">
             <div class="category-item" data-category="clothing">
               <div class="category-icon">👕</div>
               <div class="category-name">Clothing</div>
@@ -452,7 +373,7 @@
           </div>
 
           <!-- Donor Information -->
-          <h3 style="margin-top: 40px; margin-bottom: 20px; color: #1565c0;">Your Information</h3>
+          <h3 style="margin-top: 40px; margin-bottom: 20px; color: #c24244;">Your Information</h3>
           <div class="form-row">
             <div class="form-group">
               <label class="form-label" for="donor-name">Full Name</label>
@@ -477,7 +398,7 @@
 
           <!-- Item Details -->
           <div class="item-details">
-            <h3 style="margin-top: 10px; margin-bottom: 20px; color: #1565c0;">Item Details</h3>
+            <h3 style="margin-top: 10px; margin-bottom: 20px; color: #c24244;">Item Details</h3>
             <div class="form-group">
               <label class="form-label" for="item-name">Item Name/Description</label>
               <input type="text" class="form-control" id="item-name" required placeholder="Brief description of the item" />
@@ -519,7 +440,7 @@
               <textarea class="form-control" id="item-notes" placeholder="Any additional details about the item or pickup preferences"></textarea>
             </div>
 
-            <button type="submit" class="submit-btn" style="margin-top: 30px; padding: 15px 30px; font-size: 18px; background-color: #1976d2; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">Submit Donation</button>
+            <button type="submit" class="submit-btn" style="margin-top: 30px; padding: 15px 30px; font-size: 18px; background-color: #c24244; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: 600; transition: all 0.3s;">Submit Donation</button>
           </div>
         </form>
 

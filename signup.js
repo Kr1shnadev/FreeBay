@@ -43,7 +43,7 @@ function registerUser() {
       status.textContent = "Signup successful! You can now sign in.";
       status.style.color = "#388e3c";
       setTimeout(() => {
-        window.location.href = "index.html";
+        window.location.href = "login.html";
       }, 1500);
     })
     .catch((error) => {
