@@ -129,7 +129,7 @@
                             <p class="description">Wooden study table with comfortable chair, great condition</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Good</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -145,7 +145,7 @@
                             <p class="description">Complete set of engineering books, like new condition</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Like New</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -162,7 +162,7 @@
                             <p class="description">Core i5, 8GB RAM, 256GB SSD, good battery life</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Good</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -178,7 +178,7 @@
                             <p class="description">21-speed mountain bike, recently serviced</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Good</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -194,7 +194,7 @@
                             <p class="description">Set of winter jackets and sweaters, size M</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Like New</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -210,7 +210,7 @@
                             <p class="description">Yamaha acoustic guitar with bag and picks</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Fair</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -226,7 +226,7 @@
                             <p class="description">Comfortable fabric sofa, beige color</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Good</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -244,7 +244,7 @@
                             <p class="description">Various LEGO sets with instruction manuals</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Good</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -262,7 +262,7 @@
                             <p class="description">Full HD monitor with HDMI and VGA ports</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Good</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -278,7 +278,7 @@
                             <p class="description">Complete cricket set with bat, pads, and helmet</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Fair</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -294,7 +294,7 @@
                             <p class="description">5-tier wooden bookshelf, easy to assemble</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Like New</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -310,7 +310,7 @@
                             <p class="description">4GB RAM, 64GB storage, with charger and case</p>
                             <div class="card-footer">
                                 <span class="condition"><i class="fas fa-star"></i> Good</span>
-                                <a href="#" class="contact-btn"><i class="fab fa-whatsapp"></i> Contact</a>
+                                <a href="#" class="contact-btn" data-phone="9876543210"><i class="fab fa-whatsapp"></i> Contact Donor</a>
                             </div>
                         </div>
                     </div>
@@ -430,6 +430,9 @@
             if (donation.item.category === 'toys') imageSrc = 'images/lego.png';
             if (donation.item.category === 'music') imageSrc = 'images/guitar.png';
             
+            // Get phone number from donation data
+            const phoneNumber = donation.donor && donation.donor.phone ? donation.donor.phone : '9876543210';
+            
             card.innerHTML = `
                 <div class="card-image">
                     <img src="${imageSrc}" alt="${donation.item.name}">
@@ -444,7 +447,7 @@
                     <p class="description">${donation.item.notes || 'No description available'}</p>
                     <div class="card-footer">
                         <span class="condition"><i class="fas fa-star"></i> ${donation.item.condition || 'Good'}</span>
-                        <a href="#" class="contact-btn" data-donor-email="${donation.userEmail}"><i class="fab fa-whatsapp"></i> Contact</a>
+                        <a href="#" class="contact-btn" data-phone="${phoneNumber}"><i class="fab fa-whatsapp"></i> ${phoneNumber}</a>
                     </div>
                 </div>
             `;
@@ -488,6 +491,7 @@
                 const description = donation.item.notes || 'No description available';
                 
                 // Create URL with parameters
+                const phone = card.querySelector('.contact-btn').getAttribute('data-phone') || '9876543210';
                 const params = new URLSearchParams({
                     title: title,
                     category: category,
@@ -495,7 +499,8 @@
                     location: location,
                     description: description,
                     image: imageSrc,
-                    id: donationId
+                    id: donationId,
+                    phone: phone
                 });
                 
                 // Navigate to details page
@@ -504,6 +509,25 @@
             
             return card;
         }
-    </script>
+        // Show donor phone number inside the WhatsApp Contact Donor button immediately
+    document.addEventListener('DOMContentLoaded', function() {
+      // First, display phone numbers in all buttons on page load
+      document.querySelectorAll('.contact-btn').forEach(btn => {
+        const phone = btn.getAttribute('data-phone');
+        if (phone) {
+          btn.innerHTML = `<i class='fab fa-whatsapp'></i> ${phone}`;
+          btn.style.background = '#25D366';
+          btn.style.color = '#fff';
+          btn.style.fontWeight = 'bold';
+        }
+        
+        // Still handle click for any additional styling or behavior
+        btn.addEventListener('click', function(e) {
+          e.preventDefault();
+          // Maybe add a copy-to-clipboard feature here in the future
+        });
+      });
+    });
+</script>
 </body>
 </html>

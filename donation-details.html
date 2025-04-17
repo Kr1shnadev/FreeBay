@@ -130,6 +130,7 @@
             const location = params.get('location') || 'Location';
             const description = params.get('description') || 'Description';
             const image = params.get('image') || 'default-image.jpg';
+            const phone = params.get('phone') || '9876543210'; // Default phone number if not provided
             
             // Create the HTML content
             donationContent.innerHTML = `
@@ -150,10 +151,10 @@
                             <span>${condition}</span>
                         </div>
                         <div class="contact-section">
-                            <a href="#" class="whatsapp-btn">
+                            <div class="whatsapp-btn">
                                 <i class="fab fa-whatsapp"></i>
-                                Contact Donor
-                            </a>
+                                ${phone}
+                            </div>
                         </div>
                     </div>
                 </div>
