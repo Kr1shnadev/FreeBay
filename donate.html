@@ -632,7 +632,13 @@
               db.collection('users').doc(currentUser.uid).collection('donations').doc(docRef.id).set(donationData)
                 .then(() => {
                   // Redirect to browse.html after successful donation
-                  window.location.href = 'browse.html';
+                  // Hide the form and show the thank you message
+                  donationForm.style.display = 'none';
+                  donationSuccess.style.display = 'block';
+                  // Redirect after 2 seconds
+                  setTimeout(function() {
+                    window.location.href = 'browse.html';
+                  }, 2000);
                 })
                 .catch(error => {
                   alert('Error saving to user profile: ' + error.message);
