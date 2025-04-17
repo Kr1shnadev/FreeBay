@@ -3,59 +3,198 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>DaanSetu Signup - Create Account</title>
-  <link rel="stylesheet" href="style.css" />
+  <title>DaanSetu Signup - Share with Purpose</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background: #ffede7;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 20px;
+    }
+
+    .login-container {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .login-box {
+      width: 100%;
+      background: white;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 12px rgba(127, 71, 34, 0.1);
+      text-align: center;
+    }
+
+    .login-logo {
+      margin-bottom: 20px;
+    }
+
+    .login-logo img {
+      width: 80px;
+      height: auto;
+    }
+
+    h2 {
+      color: #c24244;
+      font-size: 24px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .marketplace-tagline {
+      color: #7f4722;
+      font-size: 16px;
+      margin-bottom: 30px;
+      font-weight: 500;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      border: 2px solid #ffede7;
+      border-radius: 8px;
+      font-size: 15px;
+      color: #7f4722;
+      transition: border-color 0.3s ease;
+      background: white;
+    }
+
+    input:focus {
+      outline: none;
+      border-color: #c24244;
+    }
+
+    input::placeholder {
+      color: #7f4722;
+      opacity: 0.6;
+    }
+
+    .password-group {
+      position: relative;
+    }
+
+    .toggle-password {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #7f4722;
+      padding: 5px;
+    }
+
+    button[type="submit"] {
+      width: 100%;
+      padding: 12px;
+      background: #c24244;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.3s ease;
+      margin-top: 10px;
+    }
+
+    button[type="submit"]:hover {
+      background: #a93638;
+    }
+
+    .signup-link {
+      margin-top: 20px;
+      color: #7f4722;
+      font-size: 14px;
+    }
+
+    .signup-link a {
+      color: #c24244;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .signup-link a:hover {
+      color: #a93638;
+    }
+
+    #signup-status {
+      margin-top: 15px;
+      font-size: 14px;
+      color: #7f4722;
+    }
+
+    .password-strength {
+      margin-top: 5px;
+      font-size: 12px;
+      text-align: left;
+      color: #7f4722;
+    }
+
+    @media (max-width: 480px) {
+      .login-box {
+        padding: 30px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <!-- 🔵 Animated Particles Background -->
-  <div id="particles-js"></div>
-
-  <!-- 📝 Signup Form -->
   <div class="login-container">
     <form class="login-box" onsubmit="return registerUser()">
       <div class="login-logo">
-        <img src="logo.png.png" alt="DaanSetu Logo" style="width:80px;height:auto;" />
+        <img src="logo.png.png" alt="DaanSetu Logo">
       </div>
-      <h2>DaanSetu Signup</h2>
-      <div class="marketplace-tagline">Create your DaanSetu account</div>
+      <h2>Create Account</h2>
+      <div class="marketplace-tagline">Join DaanSetu and start sharing</div>
       <div class="input-group">
-        <input type="text" id="signup-name" required placeholder="Full Name" />
+        <input type="text" id="signup-name" required placeholder="Full Name">
       </div>
       <div class="input-group">
-        <input type="email" id="signup-email" required placeholder="Email" />
+        <input type="email" id="signup-email" required placeholder="Email">
       </div>
       <div class="input-group password-group">
-        <input type="password" id="signup-password" required placeholder="New Password" autocomplete="new-password" />
-        <div class="password-toggle-wrapper">
-          <button type="button" class="toggle-password" id="toggleSignupPasswordBtn" aria-label="Show password" onclick="toggleSignupPassword()">
-            <svg id="signupEyeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
-              <circle cx="12" cy="12" r="3"></circle>
-            </svg>
-          </button>
-        </div>
+        <input type="password" id="signup-password" required placeholder="New Password" autocomplete="new-password">
+        <button type="button" class="toggle-password" id="toggleSignupPasswordBtn" aria-label="Show password" onclick="toggleSignupPassword()">
+          <svg id="signupEyeIcon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"></path>
+            <circle cx="12" cy="12" r="3"></circle>
+          </svg>
+        </button>
       </div>
       <div class="input-group password-group">
-        <input type="password" id="signup-confirm-password" required placeholder="Confirm Password" autocomplete="new-password" />
+        <input type="password" id="signup-confirm-password" required placeholder="Confirm Password" autocomplete="new-password">
       </div>
-      <button type="submit">Sign Up</button>
+      <button type="submit">Create Account</button>
       <p class="signup-link">Already have an account? <a href="login.html">Sign in</a></p>
-      <p id="signup-status" style="text-align:center; margin-top:10px;"></p>
+      <p id="signup-status"></p>
     </form>
   </div>
 
-  <!-- ✅ Firebase JS SDK -->
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
   <script src="signup.js"></script>
-
-
-  <!-- 🌟 Particles.js for Animated Background -->
-  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-  <script>
-    particlesJS.load("particles-js", "particles.json", function () {
-      console.log("particles.js loaded successfully.");
-    });
-  </script>
 </body>
 </html>
