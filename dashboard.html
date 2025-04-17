@@ -284,8 +284,10 @@
                 <label for="phone">Phone:</label>
                 <input type="text" id="phone" name="phone" placeholder="Enter phone number" required style="width: 100%; padding: 8px 12px; border: 2px solid #ffdcc8; border-radius: 6px; font-family: inherit; color: #7f4722; background: white;">
                 <label for="address">Address:</label>
-                <input type="text" id="address" name="address" placeholder="Enter address" required style="width: 100%; padding: 8px 12px; border: 2px solid #ffdcc8; border-radius: 6px; font-family: inherit; color: #7f4722; background: white;">
-                <button type="submit" id="save-extra" class="save-btn">Save Info</button>
+                <div style="position: relative; width: 100%; margin-bottom: 16px;">
+                  <input type="text" id="address" name="address" placeholder="Enter address" required style="width: 100%; padding: 8px 90px 8px 12px; border: 2px solid #ffdcc8; border-radius: 6px; font-family: inherit; color: #7f4722; background: white; box-sizing: border-box;">
+                  <button type="submit" id="save-extra" class="save-btn" style="position: absolute; top: 0; right: 0; height: 100%; border-radius: 0 6px 6px 0; padding: 0 24px;">Save Info</button>
+                </div>
             </form>
             <div id="extra-status"></div>
         </div>

@@ -45,8 +45,8 @@
     }
     
     .site-logo {
-      width: 35px;
-      height: 35px;
+      width: 30px;
+      height: 30px;
       object-fit: contain;
       margin-right: 10px;
     }
@@ -56,6 +56,30 @@
       font-weight: 600;
       color: #c24244;
       letter-spacing: 3px;
+    }
+    
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+    
+    .nav-link {
+      font-size: 1rem;
+      color: #c24244;
+      text-decoration: none;
+      padding: 6px 14px;
+      margin-left: 8px;
+      border: 1.5px solid #c24244;
+      border-radius: 6px;
+      background: #fff6f2;
+      font-weight: 500;
+      transition: background 0.2s, color 0.2s, border 0.2s;
+    }
+    
+    .nav-link.active, .nav-link:hover {
+      background: #c24244;
+      color: #fff;
+      border-color: #c24244;
     }
     
     /* Main content styles */
@@ -318,7 +342,7 @@
     <!-- Header -->
     <header class="header">
       <div class="logo-container">
-        <img src="logo.png" alt="DaanSetu Logo" class="site-logo" />
+        <img src="logo.png.png" alt="DaanSetu Logo" class="site-logo" />
         <h1 class="site-name">DaanSetu</h1>
       </div>
       <nav class="nav-links">
@@ -412,12 +436,9 @@
               <div class="form-group">
                 <label class="form-label" for="item-condition">Condition</label>
                 <select class="form-control" id="item-condition" required>
-                  <option value="">Select condition</option>
-                  <option value="new">New (unused)</option>
                   <option value="like-new">Like New</option>
                   <option value="good">Good</option>
                   <option value="fair">Fair</option>
-                  <option value="needs-repair">Needs Repair</option>
                 </select>
               </div>
             </div>
