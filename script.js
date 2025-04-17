@@ -57,7 +57,7 @@ function validateLogin() {
   auth.signInWithEmailAndPassword(email, password)
     .then((userCredential) => {
       // Signed in
-      alert('Login successful! Welcome to FreeBay.');
+      alert('Login successful! Welcome to DaanSetu.');
       // Redirect to browse.html
       window.location.href = 'browse.html';
     })
