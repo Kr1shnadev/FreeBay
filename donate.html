@@ -664,8 +664,7 @@
         const quantity = document.getElementById('item-quantity').value;
         const condition = document.getElementById('item-condition').value;
         const notes = document.getElementById('item-notes').value;
-        const deliveryMethod = document.querySelector('input[name="delivery-method"]:checked').value;
-        const pickupAddress = document.getElementById('pickup-address').value;
+
 
         // Save donation to Firebase (text/metadata only, no images)
         const db = firebase.firestore();
@@ -681,10 +680,6 @@
               condition,
               notes
               // photoUrl removed
-            },
-            delivery: {
-              method: deliveryMethod,
-              address: pickupAddress
             },
             status: 'pending',
             timestamp: firebase.firestore.FieldValue.serverTimestamp()
